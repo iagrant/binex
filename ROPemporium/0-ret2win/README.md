@@ -1,18 +1,19 @@
-# RET2WIN
-
+# RET2WIN - The First Step of ROP
 
 ## 32 bit
 
 ### Finding the Buffer Size
 
-Using gef/gdb to find how larget the bufer is by making a de Bruijn cyclic pattern.
-Which is a pattern that doesn't repeat so the program can easily find the exact spot that breaks the binary.
+Use gef/gdb to find how larget the bufer is by making a de Bruijn cyclic pattern.
 
-I created a pattern of length 50 to see where the buffer breaks
+A de Bruijn cyclic pattern is a pattern that doesn't repeat so the program can easily find the exact spot that breaks the binary.
+
+I used a pattern of length 50 to see where the buffer breaks
 
 ![pattern](imgs/32bit/pattern.png)
 
-Looking at the registers we can see that the input spilled out of the intended buffer and into $eip (the index pointer which is the register that holds the current instructon ie the current step in the code)
+Looking at the registers we can see that the input spilled out of the intended buffer and into $eip
+- $eip is the index pointer which is the register that holds the current instructon ie the current step in the code
 
 ![registers](imgs/32bit/registers.png)
 
@@ -30,6 +31,8 @@ Looking at all the functions in the file we find one that isn't called by main a
 ![functions](imgs/32bit/functions.png)
 
 If we open it up in ghidra we get a pretty cool decompiled view of the function, showing exactly what it does.
+
+And perfect! We want to cat the flag.txt file.
 
 ![decompiled](imgs/32bit/ret2winDecompiled.png)
 
