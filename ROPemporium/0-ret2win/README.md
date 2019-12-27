@@ -42,8 +42,9 @@ If we append that address to the end of the 44 bytes of garbage then the address
 
 In python we can use pwntools to easily assemble this string
 ```
+from pwn import *
 junk = ("A"*40).encode # we encode the string so it can concatinated with the address of ret2win
-payload = junk + pwn.p32(0x08048659) #google pwntools to get the python lib pwn it makes packing address painless
+payload = junk + p32(0x08048659) #google pwntools to get the python lib pwn it makes packing address painless
 ```
 
 Allowing us to changing the flow of the program to do what we want instead of what was intended.
@@ -58,6 +59,6 @@ We can combine the junk 44 bytes and our 'payload' contain the address of the fu
 
 The same as above but the address that we will be jumping to will need to be in a 64bit format.
 
-So if you are using pwn it will be `pwn.p64(0xdeadbeef)` vs `pwn.p32(0xdeadbeef)` a really huge and complicated diffrence.
+So if you are using pwn it will be `p64(0xdeadbeef)` vs `p32(0xdeadbeef)` a really huge and complicated diffrence.
 
 
