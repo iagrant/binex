@@ -3,7 +3,7 @@
 
 ## 32 bit
 
-### Buffer Overflow
+### Finding the Buffer Size
 
 Using gef/gdb to find how larget the bufer is by making a de Bruijn cyclic pattern.
 Which is a pattern that doesn't repeat so the program can easily find the exact spot that breaks the binary.
@@ -20,6 +20,8 @@ Looking at the registers we can see that the input spilled out of the intended b
 Using the following command gef can nicely give us the offset needed to break the buffer.
 
 ![offset](32bit/imgs/offset.png)
+
+### Modifing the Instruction Pointer
 
 Now that we are able to bump $eip and take control of where the program goes we need to find where we want it to go
 
