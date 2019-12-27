@@ -8,12 +8,11 @@ Use gef/gdb to find how larget the bufer is by making a de Bruijn cyclic pattern
 
 A de Bruijn cyclic pattern is a pattern that doesn't repeat so the program can easily find the exact spot that breaks the binary.
 
-I used a pattern of length 50 to see where the buffer breaks
-
 ![pattern](imgs/32bit/pattern.png)
 
 Looking at the registers we can see that the input spilled out of the intended buffer and into $eip
-- $eip is the index pointer which is the register that holds the current instructon ie the current step in the code
+- $eip is the index pointer which is the register that holds the current instructon ie the current step or location in the code
+- If we are able to modifiy it then we can modify what the program does
 
 ![registers](imgs/32bit/registers.png)
 
