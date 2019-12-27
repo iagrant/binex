@@ -56,4 +56,8 @@ We can combine the junk 44 bytes and our 'payload' contain the address of the fu
 
 ## 64 bit
 
-The same as above but the address that we will be jumping to will need to be in a 64bit format
+The same as above but the address that we will be jumping to will need to be in a 64bit format.
+
+So if you are using pwn it will be `pwn.p64(0xdeadbeef)` vs `pwn.p32(0xdeadbeef)` a really huge and complicated diffrence.
+
+
