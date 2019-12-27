@@ -54,9 +54,9 @@ Once the buffer is filed and we spill out onto the stack and later overwriting $
 
 Allowing us to changing the flow of the program to do what we want instead of what was intended.
 
-This is the basic principle of Return Oriented Programming (ROP), overflow the buffer and take controle of the instruction pointer, after that it gets a lot more complicated but that is the extreme basics.
+This is the basic principle of Return Oriented Programming (ROP), overflow the buffer and take controle of the instruction pointer, after that it gets a lot more complicated but that is the basics.
 
-We can combine the junk 44 bytes and our 'payload' contain the address of the function we want to into a nice python [script](exploit32.py)
+We can combine the junk 44 bytes and our 'payload' containing the address of the function we want to into a nice python [script](exploit32.py)
 
 ![flag](imgs/32bit/flag.png)
 
