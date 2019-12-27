@@ -10,16 +10,16 @@ Which is a pattern that doesn't repeat so the program can easily find the exact 
 
 I created a pattern of length 50 to see where the buffer breaks
 
-![pattern](32bit/imgs/pattern.png)
+![pattern](imgs/32bit/pattern.png)
 
 Looking at the registers we can see that the input spilled out of the intended buffer and into $eip (the index pointer which is the register that holds the current instructon ie the current step in the code)
 
-![registers](32bit/imgs/registers.png)
+![registers](imgs/32bit/registers.png)
 
 
 Using the following command gef can nicely give us the offset needed to break the buffer.
 
-![offset](32bit/imgs/offset.png)
+![offset](imgs/32bit/offset.png)
 
 ### Modifing the Instruction Pointer
 
@@ -27,11 +27,11 @@ Now that we are able to bump $eip and take control of where the program goes we 
 
 Looking at all the functions in the file we find one that isn't called by main and isn't just a normal C function `ret2win`
 
-![functions](32bit/imgs/functions.png)
+![functions](imgs/32bit/functions.png)
 
 If we open it up in ghidra we get a pretty cool decompiled view of the function, showing exactly what it does.
 
-![decompiled](32bit/imgs/ret2winDecompiled.png)
+![decompiled](imgs/32bit/ret2winDecompiled.png)
 
 From the gdb output we can see the address of the function `0x08048659`
 
@@ -43,6 +43,6 @@ This is the basic principle of Return Oriented Programming (ROP), overflow the b
 
 We can combine the junk 44 bytes and our 'payload' contain the address of the function we want to into a nice python [script](exploit32.py)
 
-![flag](32bit/imgs/flag.png)
+![flag](imgs/32bit/flag.png)
 
 ## 64 bit
