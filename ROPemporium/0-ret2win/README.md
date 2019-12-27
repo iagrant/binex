@@ -10,7 +10,7 @@ Which is a pattern that doesn't repeat so the program can easily find the exact 
 
 I created a pattern of length 50 to see where the buffer breaks
 
-![pattern](imgs/pattern.png = 500x)
+![pattern](imgs/pattern.png)
 
 Looking at the registers we can see that the input spilled out of the intended buffer and into $eip (the index pointer which is the register that holds the current instructon ie the current step in the code)
 
