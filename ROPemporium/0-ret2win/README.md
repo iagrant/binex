@@ -49,6 +49,9 @@ payload = junk + p32(0x08048659) #google pwntools to get the python lib pwn it m
 
 ![stack](imgs/32bit/stack.png)
 
+All the 41s in the above picture of the stack are the As we used in the junk var to overflow the buffer.
+
+Once the buffer is filed and we spill out onto the stack and later overwriting $eip.
 Allowing us to changing the flow of the program to do what we want instead of what was intended.
 
 This is the basic principle of Return Oriented Programming (ROP), overflow the buffer and take controle of the instruction pointer, after that it gets a lot more complicated but that is the extreme basics.
