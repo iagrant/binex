@@ -6,13 +6,11 @@
 Once again fire up gef-gdb and locate the offset needed to file the buffer. `44 bytes` once again!
 
 If we fire up ghidra and look at the disasm and the decompiled sections we see that sadly there is no magical function for us to call and win.
-
 We actually have to try and do something.
 
 ### Useful Function & String
 
 But there's still hope!
-
 There's this cool useful function waiting to be used but sadly its got a gross parameter of `/bin/ls`
 ![usefulFunction](imgs/32bit/usefulFunction.png)
 
