@@ -39,6 +39,8 @@ payload = system+arg
 ```
 
 We need the 44 bytes of junk to overflow the buffer so then the adress of where system gets called can overflow into $eip and change the flow of the program
+All the \x41s are the As we use as the junk to fill up the buffer.
+Then when we leave the function the stack pointer is incremented and it pops the "return address" off of the stack but instead of the real return address being poped off the stack the address to `system` is poped
 
 ![stack](imgs/32bit/stack.png)
 

@@ -47,6 +47,8 @@ junk = ("A"*40).encode # we encode the string so it can concatinated with the ad
 payload = junk + p32(0x08048659) #google pwntools to get the python lib pwn it makes packing address painless
 ```
 
+![stack](imgs/32bit/stack.png)
+
 Allowing us to changing the flow of the program to do what we want instead of what was intended.
 
 This is the basic principle of Return Oriented Programming (ROP), overflow the buffer and take controle of the instruction pointer, after that it gets a lot more complicated but that is the extreme basics.
