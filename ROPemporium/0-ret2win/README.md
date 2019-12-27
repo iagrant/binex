@@ -14,11 +14,12 @@ I created a pattern of length 50 to see where the buffer breaks
 
 Looking at the registers we can see that the input spilled out of the intended buffer($eax) and into $eip
 
-[registers][imgs/registers.png]
+[registers](imgs/registers.png)
 
 
 Using the following command gef can nicely give us the offset needed to break the buffer.
-[offset][imgs/offset.png]
+
+[offset](imgs/offset.png)
 
 
 ## 64 bit
