@@ -12,6 +12,7 @@ We actually have to try and do something.
 
 But there's still hope!
 There's this cool useful function waiting to be used but sadly its got a gross parameter of `/bin/ls`
+![gross](imgs/32bit/gross.png)
 ![usefulFunction](imgs/32bit/usefulFunction.png)
 
 Luckily there's also a useful string for us to use. Go into ghidra and search for `bin` in program text then data values and you'll get:
