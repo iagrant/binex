@@ -4,7 +4,9 @@
 ## 32 bit
 
 Once again fire up gef-gdb and locate the offset needed to file the buffer. `44 bytes` once again!
+
 If we fire up ghidra and look at the disasm and the decompiled sections we see that sadly there is no magical function for us to call and win.
+
 We actually have to try and do something.
 
 ### Useful Function & String
