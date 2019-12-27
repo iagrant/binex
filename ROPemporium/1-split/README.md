@@ -40,6 +40,8 @@ payload = system+arg
 
 We need the 44 bytes of junk to overflow the buffer so then the adress of where system gets called can overflow into $eip and change the flow of the program
 
+![stack](imgs/32bit/stack.png)
+
 Then after system address is pushed on the stack we push the address of the useful string aka `/bin/cat flag.txt` onto it so when we go to the `system` function call it'll pull `/bin/cat flag.txt` as the argument off the stack
 
 ![syscall](imgs/32bit/syscall.png)
