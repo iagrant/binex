@@ -1,7 +1,7 @@
 # RET2WIN
 
 
-## 64bit
+## 32 bit
 
 ### Buffer Overflow
 
@@ -10,15 +10,15 @@ Which is a pattern that doesn't repeat so the program can easily find the exact 
 
 I created a pattern of length 50 to see where the buffer breaks
 
-![pattern][pattern.png]
+[pattern][pattern.png]
 
 Looking at the registers we can see that the input spilled out of the intended buffer($eax) and into $eip
 
-![registers][registers.png]
+[registers][registers.png]
 
 
 Using the following command gef can nicely give us the offset needed to break the buffer.
-![offset][offset.png]
+[offset][offset.png]
 
 
-## 32bit
+## 64 bit
