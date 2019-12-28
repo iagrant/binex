@@ -12,7 +12,7 @@ Running it we see some pretty bad news
 ```
 badchars are: b i c / <space> f n s
 ```
-Which eliminates `/bin` and other goodies from our input and any opcodes that happen to have the same bytes as the above chars
+Which eliminates `/bin` and other goodies from our input and any gadgets that happen to have the same bytes as the above chars
 
 Converting them to hex so later we can give the bad bytes to `ropper` so it knows to avoid them
 ```
@@ -131,7 +131,7 @@ Now we just need to make a ropchain with the previously used key to xor the stri
 
 Code Snip of it all together:
 ```
-key = "D".ljust(8,"\x00").encode() #left justfied so it becomes 8 bytes in length "D\x00\x00\x00\x00\x00\x00\x00"
+key = "D".ljust(8,"\x00").encode() #left justfied so it becomes 8 bytes in length
 pop_r14_r15 = p64(0x400b40)
 xor_r15_r14b = p64(0x400b30)
 
