@@ -12,9 +12,9 @@ Running it we see some pretty bad news
 ```
 badchars are: b i c / <space> f n s
 ```
-Which eliminates `/bin` from our ropchain and any opcodes that happen to have the same bytes as the above chars
+Which eliminates `/bin` and other goodies from our input and any opcodes that happen to have the same bytes as the above chars
 
-Converting them to hex so later we can give the bad bytes to ropper so it avoids them
+Converting them to hex so later we can give the bad bytes to `ropper` so it knows to avoid them
 ```
 0x62, 0x69, 0x63, 0x2f, 0x20, 0x66, 0x6e, 0x73
 ```
@@ -26,7 +26,7 @@ Luckily ROPEmporium was nice and left a hint in the symbol table of the ELF
 
 ![hint](imgs/64bit/usefulGadget.png)
 
-If they weren't that nice we could have also found that gadget and other useful gadgets by using ropper which is covered in **Finding Gadgets** section below
+If they weren't that nice we could have also found that gadget and other useful gadgets by using `ropper` which is covered in **Finding Gadgets** section below
 
 So now that we know we have a nice XOR gadget to be used we need to XOR the badchars in `/bin/cat flag.txt` with a key in this instance a single letter since its
 ```
@@ -55,7 +55,7 @@ The payload is gonna have 3 parts
 
 #### Finding Gadgets
 
-ropper is a super handy gadget finder that gef uses to locate ROP gadgets. It's general usage is as follows
+`ropper` is a super handy gadget finder that gef uses to locate ROP gadgets. It's general usage is as follows
 - A 'gadget' in ROP terms is a string of asm operations followed by a ret call so it can be chained or returned into the next part of the ropchain
 - `--search` uses a regex to find your query in the asm's opcodes ex: `--search "pop rdi"` will return gadgets that contain `pop rdi`
 - `-b` is used to specify bad bytes, which is critical for this challenge
