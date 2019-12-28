@@ -43,14 +43,14 @@ And only XOR the bad chars and not the whole string or later the ROPchain will h
 "/bin/cat flag.txt" XOR "D" = "k&-*k'atd"lag.txt"
 ```
 
-Now that we can disguise our favorite string we can move on to creating the payload
+Now that we have disguise our favorite string we can move on to creating the payload
 
 ### Creating the Payload
 
-The payload is gonna have 3 parts
-1) loading the string to memory
-2) modifying the string in memory
-3) loading the string into system call
+The payload is made of 3 parts
+1) Loading the string to memory
+2) Modifying the string in memory
+3) Loading the string into the system call
 
 #### Finding Gadgets
 
@@ -65,7 +65,7 @@ ropper --search $QUERY -b 6269632f20666e73 #-b is bad bytes and the number is al
 
 #### Loading the String
 
-Searching by `mov qword` we get mov whats in r12 into the memory address stored in r13
+Searching by `mov qword` we get mov the value of r12 into the memory address stored in r13
 
 ```
 ropper --search "mov qword" -b 6269632f20666e73
@@ -82,11 +82,6 @@ ropper --search "pop r12" -b 6269632f20666e73
 
 0x0000000000400b3b: pop r12; pop r13; ret;
 ```
-
-Using these two gadgets we are able to take our string off the stack and into memory. But we can't use a lot of chars so whats the point!?
-
-Even if we can write to memory it'll be missing chars so it'll just be garbage. But luckily we disguised our favorite string in the previous section
-- The important thing is that it doesn't have any of the previously stated bad chars
 
 We also need to find somewhere to place the string into memory. We can find this by looking at the ELF's sections. Using `rabin2` from radare2
 ```
