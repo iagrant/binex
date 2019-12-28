@@ -28,7 +28,7 @@ Luckily ROPEmporium was nice and left a hint in the symbol table of the ELF
 
 If they weren't that nice we could have also found that gadget and other useful gadgets by using `ropper` which is covered in **Finding Gadgets** section below
 
-So now that we know we have a nice XOR gadget to be used we need to XOR the badchars in `/bin/cat flag.txt` with a key in this instance a single letter since the gadget is:
+So now that we know we have a nice XOR gadget to be used we need to XOR the badchars in `/bin/cat flag.txt` with a key in this instance a single letter because of the useful gadget:
 ```
 xor byte ptr [r15], r14b; ret;
 ```
