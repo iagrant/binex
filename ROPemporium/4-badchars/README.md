@@ -63,7 +63,7 @@ The payload is made of 3 parts
 ropper --search $QUERY -b 6269632f20666e73 #-b is bad bytes and the number is all the bad bytes above just lumped together
 ```
 
-#### Loading the String
+### Loading the String
 
 Searching by `mov qword` we get mov the value of r12 into the memory address stored in r13
 
@@ -111,7 +111,7 @@ Test and get this part working before moving on.
 
 ![loaded string](imgs/64bit/loadedString.png)
 
-#### Modifing the String
+### Modifing the String
 
 Now that the string is loaded into memory we can modify it back to it's original state
 
@@ -163,7 +163,7 @@ Once again run and test this stage of the exploit before moving on. The less to 
 ![modified string](imgs/64bit/modifiedString.png)
 
 
-#### System Call!
+### System Call!
 
 Now we get to feed the address of our string to the system call and get the flag!
 
