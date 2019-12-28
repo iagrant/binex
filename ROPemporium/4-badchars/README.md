@@ -32,13 +32,12 @@ So now that we know we have a nice XOR gadget to be used we need to XOR the badc
 ```
 xor byte ptr [r15], r14b; ret;
 ```
-This XORs a single byte in r15 with the low/first byte of r14
-
-So our XOR key will just be a single letter
+This XORs a single byte in r15 with the low/first byte of r14. The XOR key is just be a single char
 
 Using [xor.py](xor.py) a quick and dirty script made to help find a key that didn't produce any badchars
 
 The key doesn't have to be the same for all of them. I just did for convience.
+And only XOR the bad chars and not the whole string or later the ROPchain will have too many operations
 
 ```
 "/bin/cat flag.txt" XOR "D" = "k&-*k'atd"lag.txt"
