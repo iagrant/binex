@@ -62,8 +62,5 @@ We can combine the junk 44 bytes and our 'payload' containing the address of the
 
 ## 64 bit
 
-The same as above but the address that we will be jumping to will need to be in a 64bit format.
-
-So if you are using pwn it will be `p64(0xdeadbeef)` vs `p32(0xdeadbeef)` a really huge and complicated diffrence.
-
+The same as above but the address that we will be jumping to will need to be in a 64bit format and the offset found will be 40 bytes instead of 44 bytes.
 
