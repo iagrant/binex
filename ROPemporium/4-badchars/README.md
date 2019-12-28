@@ -28,15 +28,18 @@ Luckily ROPEmporium was nice and left a hint in the symbol table of the ELF
 
 If they weren't that nice we could have also found that gadget and other useful gadgets by using `ropper` which is covered in **Finding Gadgets** section below
 
-So now that we know we have a nice XOR gadget to be used we need to XOR the badchars in `/bin/cat flag.txt` with a key in this instance a single letter because of the useful gadget:
+So now that we know a nice XOR gadget to be used we need to XOR the badchars in `/bin/cat flag.txt` with a key.
+
+In this instance the key is a single letter because the useful gadget:
 ```
 xor byte ptr [r15], r14b; ret;
 ```
-This XORs a single byte in r15 with the low/first byte of r14. The XOR key is just be a single char
+This XORs a single byte in r15 with the low/first byte of r14. Therefore the XOR key is just be a single char
 
 Using [xor.py](xor.py) a quick and dirty script made to help find a key that didn't produce any badchars
 
 The key doesn't have to be the same for all of them. I just did for convience.
+
 And only XOR the bad chars and not the whole string or later the ROPchain will have too many operations
 
 ```
@@ -131,7 +134,7 @@ Now we just need to make a ropchain with the previously used key to xor the stri
 
 Code Snip of it all together:
 ```
-key = "D".ljust(8,"\x00").encode() #left justfied so it becomes 8 bytes in length "D\x00\x00\x00\x00\x00\x00\x00"
+key = "D".ljust(8,"\x00").encode() #left justfied so it becomes 8 bytes in length
 pop_r14_r15 = p64(0x400b40)
 xor_r15_r14b = p64(0x400b30)
 
