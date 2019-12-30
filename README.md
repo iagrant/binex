@@ -6,6 +6,6 @@ Scripts, Notes and Writeups from doing various binary exploitations from diffren
 #### ROPEmporium
 - [ret2win](https://iagrant.github.io/rop%20emporium/ret2win/)
 - [split](https://iagrant.github.io/rop%20emporium/split/)
-- [callme](ROPemporium/2-callme) #TODO
+- [callme](https://iagrant.github.io/rop%20emporium/callme/)
 - [write4](ROPemporium/3-write4) #TODO
-- [badchars](ROPemporium/4-badchars)
+- [badchars](https://iagrant.github.io/rop%20emporium/badchars/)
