@@ -10,9 +10,12 @@ p = gdb.debug('./binary','b main')
 #p = process('./binary')
 
 junk = ("A"* 40).encode()
-
+payload = junk
+log.info('Payload length: %i'%len(payload))
 p.recvuntil('>')
-p.sendline(junk)
+log.info('Sending payload')
+p.sendline(payload)
+log.info('Payload Sent')
 p.interactive()
 #flag = p.recvline()
 #log.success("Flag: "+flag.decode('ascii'))
